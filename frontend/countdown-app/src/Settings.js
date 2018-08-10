@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Button, Container, Row, Col, Input } from 'reactstrap'
 import Spacer from './Spacer'
+import FontAwesome from 'react-fontawesome';
 
 class Settings extends Component {
   constructor() {
@@ -84,7 +85,12 @@ class Settings extends Component {
 
       <Row>
       <Col sm='12'>
-      <Button color="danger" block onClick={() => {this.setDialogVisible(true)}}>Reset Time</Button>
+      <Button color="danger" block onClick={() => {this.setDialogVisible(true)}}>
+      <FontAwesome className='super-crazy-colors' name='undo'
+        inverse
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      />{' '}
+      Reset Time</Button>
         </Col>
       </Row>
 
@@ -96,8 +102,18 @@ class Settings extends Component {
             Are you sure you want to reset the time?
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={() =>{this.resetTime(); this.setDialogVisible(false)}}>Yes</Button>
-            <Button color="danger" onClick={() =>{this.setDialogVisible(false)}}>No</Button>
+            <Button color="success" onClick={() =>{this.resetTime(); this.setDialogVisible(false)}}>
+            <FontAwesome className='super-crazy-colors' name='check'
+              inverse
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />{' '}
+            Yes</Button>
+            <Button color="danger" onClick={() =>{this.setDialogVisible(false)}}>
+            <FontAwesome className='super-crazy-colors' name='times'
+              inverse
+              style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+            />{' '}
+            No</Button>
           </ModalFooter>
         </Modal>
       </Container>

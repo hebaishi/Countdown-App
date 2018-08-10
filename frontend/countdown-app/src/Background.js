@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'font-awesome/css/font-awesome.min.css'; 
 import { Progress, Button, Container, Row, Col } from 'reactstrap'
 import Spacer from './Spacer'
+import FontAwesome from 'react-fontawesome';
 
 
 class Background extends Component {
@@ -55,9 +57,11 @@ class Background extends Component {
   render() {
     return(
       <Container>
+
       <Spacer/>
         <Row>
           <Col sm="12">
+          
           <h1>{this.state.days_elapsed} day{this.getS(this.state.days_elapsed)} since {this.state.label}</h1>
           </Col>
         </Row>
@@ -70,7 +74,15 @@ class Background extends Component {
         <Spacer/>
         <Row>
           <Col>
-          <Button color="success" block onClick={() => {this.reloadData()}}>Refresh</Button>
+          <Button color="success" block onClick={() => {this.reloadData()}}>
+          <FontAwesome
+        className='super-crazy-colors'
+        name='refresh'
+        // size='2x'
+        inverse
+        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+      />{' '}
+          Refresh</Button>
           </Col>
         </Row>
         <Spacer/>
