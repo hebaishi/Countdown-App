@@ -23,8 +23,8 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-        <Navbar color="light" light expand="md">
-        <NavbarBrand>Countdown-App</NavbarBrand>
+        <Navbar color="dark" dark expand="md">
+        <NavbarBrand href="/">Countdown-App</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
