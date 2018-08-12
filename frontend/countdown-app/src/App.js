@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { Component } from 'react';
-import { Collapse, Navbar, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Collapse, Navbar, Nav, NavbarToggler, NavItem } from 'reactstrap';
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Background from './Background'
 import Settings from './Settings'
 
@@ -24,18 +24,20 @@ export default class App extends Component {
       <Router>
         <div>
         <Navbar color="dark" dark expand="md">
-        <NavbarBrand href="/">Countdown-App</NavbarBrand>
+        <NavLink to="#" className="navbar-brand">
+            CountdownApp
+          </NavLink>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink href="/elapsed_time">
-              Elapsed time
-            </NavLink>
+          <NavLink to="/elapsed_time" className="nav-link">
+            Elapsed time
+          </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/settings">
-              Settings
+            <NavLink to="/settings" className="nav-link">
+            Settings
             </NavLink>
           </NavItem>
           </Nav>

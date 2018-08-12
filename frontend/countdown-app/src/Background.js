@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Progress, Button, Container, Row, Col } from 'reactstrap'
+import { Table, Progress, Badge, Button, Container, Row, Col } from 'reactstrap'
 import Spacer from './Spacer'
 import ButtonIcon from './ButtonIcon';
 
@@ -17,7 +17,6 @@ class Background extends Component {
   }
 
   getColor(val) {
-    console.log(val);
     if (val >= 0 && val <= 9) {
       return "success";
     } else  if (val >= 10 && val <= 19) {
@@ -39,7 +38,6 @@ class Background extends Component {
         label: dat.label,
         color: this.getColor(days)
       })
-      console.log(dat);
     })
   }
 
@@ -59,8 +57,7 @@ class Background extends Component {
       <Spacer/>
         <Row>
           <Col sm="12">
-          
-          <h1>{this.state.days_elapsed} day{this.getS(this.state.days_elapsed)} since {this.state.label}</h1>
+          <h1><Badge color={this.state.color}>{this.state.days_elapsed} day{this.getS(this.state.days_elapsed)}</Badge> since {this.state.label}</h1>
           </Col>
         </Row>
         <Spacer/>
