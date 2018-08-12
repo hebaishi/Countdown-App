@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'; 
 import { Progress, Button, Container, Row, Col } from 'reactstrap'
 import Spacer from './Spacer'
-import FontAwesome from 'react-fontawesome';
-
+import ButtonIcon from './ButtonIcon';
 
 class Background extends Component {
   constructor() {
@@ -46,7 +44,7 @@ class Background extends Component {
   }
 
   getS(val) {
-    if (val != 1)
+    if (val !== 1)
       return 's';
   }
 
@@ -75,19 +73,12 @@ class Background extends Component {
         <Row>
           <Col>
           <Button color="success" block onClick={() => {this.reloadData()}}>
-          <FontAwesome
-        className='super-crazy-colors'
-        name='refresh'
-        // size='2x'
-        inverse
-        style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-      />{' '}
+          <ButtonIcon name="refresh" />          
           Refresh</Button>
           </Col>
         </Row>
         <Spacer/>
       </Container>
-
     );
   }
 }

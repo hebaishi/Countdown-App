@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
-import classnames from 'classnames';
+import React, { Component } from 'react';
+import { Collapse, Navbar, Nav, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Background from './Background'
 import Settings from './Settings'
-
-const NavLinkStyle = {
-  cursor: 'pointer'
-};
 
 export default class App extends Component {
   constructor(props) {
@@ -15,56 +11,42 @@ export default class App extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      isOpen: false
     };
   }
-
-
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
+  toggle() {
       this.setState({
-        activeTab: tab
+        isOpen: !this.state.isOpen
       });
-    }
   }
   render() {
     return (
-      <div style={{scale: '1.6', overflowX: 'hidden'}}>
-        <Nav tabs>
+      <Router>
+        <div>
+        <Navbar color="light" light expand="md">
+        <NavbarBrand>Countdown-App</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav vertical className="ml-auto">
           <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '1', NavLink: true })}
-              onClick={() => { this.toggle('1'); }} style = {NavLinkStyle}
-            >
+            <NavLink className="text-muted" href="/elapsed_time">
               Elapsed time
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
-              onClick={() => { this.toggle('2'); }} style = {NavLinkStyle}
-            >
+            <NavLink className="text-muted" href="/settings">
               Settings
             </NavLink>
           </NavItem>
-        </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <Background/>
-              </Col>
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              <Col sm="12">
-                <Settings/>
-              </Col>
-            </Row>
-          </TabPane>
-        </TabContent>
-      </div>
+          </Nav>
+          </Collapse>
+
+        </Navbar>
+          <Route exact path="/" component={Background} />
+          <Route path="/elapsed_time" component={Background} />
+          <Route path="/settings" component={Settings} />
+        </div>
+      </Router>
     );
   }
 }
