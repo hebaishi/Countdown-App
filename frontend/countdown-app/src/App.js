@@ -27,14 +27,14 @@ export default class App extends Component {
         <NavbarBrand>Countdown-App</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav vertical className="ml-auto">
+          <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink className="text-muted" href="/elapsed_time">
+            <NavLink href="/elapsed_time">
               Elapsed time
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink className="text-muted" href="/settings">
+            <NavLink href="/settings">
               Settings
             </NavLink>
           </NavItem>
