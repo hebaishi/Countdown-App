@@ -1,20 +1,12 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Table, Progress, Badge, Button, Container, Row, Col } from 'reactstrap'
+import global_store from './GlobalStore';
+import { Progress, Badge, Button, Container, Row, Col } from 'reactstrap'
 import Spacer from './Spacer'
 import ButtonIcon from './ButtonIcon';
+import { view } from 'react-easy-state';
 
 class Background extends Component {
-  constructor() {
-    super();
-    this.state = {
-      days_elapsed: 0,
-      seconds_elapsed: 0,
-      label: '',
-      showDialog: false,
-      color: 'success'
-    };
-  }
 
   getColor(val) {
     if (val >= 0 && val <= 9) {
@@ -26,52 +18,29 @@ class Background extends Component {
     }
   }
 
-  reloadData() {
-    fetch('/api/elapsed_time')
-    .then((results) => {
-      return results.json();
-    }).then((dat) => {
-      var days = dat.days;
-      this.setState({
-        days_elapsed: days,
-        seconds_elapsed: dat.seconds,
-        label: dat.label,
-        color: this.getColor(days)
-      })
-    })
-  }
-
   getS(val) {
     if (val !== 1)
       return 's';
   }
 
-  componentDidMount() {
-    this.reloadData()
-  }
-
   render() {
     return(
       <Container>
-
       <Spacer/>
         <Row>
           <Col sm="12">
-          <h1><Badge color={this.state.color}>{this.state.days_elapsed} day{this.getS(this.state.days_elapsed)}</Badge> since {this.state.label}</h1>
+          <h1><Badge color={global_store.color}>{global_store.days} day{this.getS(global_store.days_elapsed)}</Badge> since {global_store.label}</h1>
           </Col>
         </Row>
         <Spacer/>
         <Row>
           <Col>
-          <Progress striped color={this.state.color} value={this.state.days_elapsed} max="30"></Progress>
+          <Progress striped color={global_store.color} value={global_store.days_elapsed} max="30"></Progress>
           </Col>
         </Row>
         <Spacer/>
         <Row>
           <Col>
-          <Button color="success" block onClick={() => {this.reloadData()}}>
-          <ButtonIcon name="refresh" />          
-          Refresh</Button>
           </Col>
         </Row>
         <Spacer/>
@@ -80,4 +49,4 @@ class Background extends Component {
   }
 }
 
-export default Background;
+export default view(Background);

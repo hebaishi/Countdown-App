@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Button, Container, Row, Col, Input } from 'reactstrap'
 import Spacer from './Spacer'
 import ButtonIcon from './ButtonIcon';
+import global_store from './GlobalStore';
+import { view } from 'react-easy-state';
+import post from './ApiUtils';
 
 class Settings extends Component {
   constructor() {
     super();
+    this.toggle = this.toggle.bind(this);
     this.state = {
-      label: ''
-    }
-    this.reloadLabel();
-    this.toggle = this.toggle.bind(this)
+      showDialog: false
+    };
   }
 
   setDialogVisible(val) {
@@ -23,44 +25,14 @@ class Settings extends Component {
     this.setDialogVisible(!this.state.showDialog)
   }
 
-
-  reloadLabel() {
-    fetch('/api/elapsed_time')
-    .then((results) => {
-      return results.json()
-    }).then( (dat) => {
-      console.log(dat);
-      this.setState({
-        label: dat.label
-      })
-    })
-  }
-
   setLabel(e) {
     var txt = e.target.value;
-    fetch('/api/label', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        label: txt
-      })
-    })
-    this.setState({
-      label: txt
-    })
+    post('/api/label', {label: txt})
+    global_store.label = txt;
   }
   
   resetTime() {
-    fetch('/api/reset_time', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    })
+    post('/api/reset_time')
   }
 
   render() {
@@ -76,7 +48,7 @@ class Settings extends Component {
 
       <Row>
       <Col sm='12'>
-        <Input placeholder='Enter your label here' onChange={evt => {this.setLabel(evt)}} value={this.state.label}>
+        <Input placeholder='Enter your label here' onChange={evt => {this.setLabel(evt)}} value={global_store.label}>
         </Input>
         </Col>
       </Row>
@@ -112,4 +84,4 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default view(Settings);

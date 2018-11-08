@@ -4,6 +4,7 @@ import { Collapse, Navbar, Nav, NavbarToggler, NavItem } from 'reactstrap';
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 import Background from './Background'
 import Settings from './Settings'
+import DataFetcher from './DataFetcher';
 
 export default class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
+        <DataFetcher/>
         <Navbar color="dark" dark expand="md">
         <NavLink to="#" className="navbar-brand">
             CountdownApp
